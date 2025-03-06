@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Labs</title>
+</head>
+<body>
+
+    <h2>Lab 1: Enabling JavaScript & Console Logging</h2>
+    <button onclick="showAlert()">Click for Alert</button>
+
+    <h2>Lab 2: Using Variables</h2>
+    <button onclick="testVariables()">Test Variables</button>
+
+    <h2>Lab 3: Working with Data Types</h2>
+    <button onclick="showDataTypes()">Check Data Types</button>
+
+    <h2>Lab 4: User Interaction</h2>
+    <button onclick="getUserInfo()">Enter Your Info</button>
+
+    <script>
+        // Lab 1: Console Logging & Alert
+        console.log("JavaScript is working!");
+        function showAlert() {
+            alert("Welcome to JavaScript!");
+        }
+
+        // Lab 2: Variables (let, const, var)
+        function testVariables() {
+            var x = 10;
+            let y = 20;
+            const z = 30;
+
+            console.log("Initial values:", x, y, z);
+
+            x = 15;
+            y = 25;
+            console.log("Reassigned values:", x, y);
+
+            try {
+                z = 35; //по идее должно выдать ошибку, т.к. константу нельзя переопределить
+            } catch (error) {
+                console.error("Error when changing const:", error);
+            }
+        }
+
+        // Lab 3: Data Types
+        function showDataTypes() {
+            let name = "John";
+            let age = 28;
+            let isStudent = true;
+            let score = null;
+            let address;
+
+            console.log(`Name: ${name} - Type: ${typeof name}`);
+            console.log(`Age: ${age} - Type: ${typeof age}`);
+            console.log(`Is Student: ${isStudent} - Type: ${typeof isStudent}`);
+            console.log(`Score: ${score} - Type: ${typeof score}`);
+            console.log(`Address: ${address} - Type: ${typeof address}`);
+        }
+
+        // Lab 4: User Interaction
+        function getUserInfo() {
+            let name = prompt("What is your name?");
+            let age = prompt("How old are you?");
+            alert(`Hello, ${name}! You are ${age} years old.`);
+        }
+    </script>
+
+</body>
+</html>

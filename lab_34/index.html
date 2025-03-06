@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Operators & Control Structures Labs</title>
+</head>
+<body>
+
+    <h2>Lab 1: Arithmetic Operators</h2>
+    <button onclick="arithmeticOperations()">Run Arithmetic Operations</button>
+
+    <h2>Lab 2: Logical Operators</h2>
+    <button onclick="checkVotingEligibility()">Check Voting Eligibility</button>
+
+    <h2>Lab 3: Comparative Operators</h2>
+    <button onclick="compareNumbers()">Compare Two Numbers</button>
+
+    <h2>Lab 4: if-else Statement</h2>
+    <button onclick="checkNumber()">Check Number</button>
+
+    <h2>Lab 5: switch Statement</h2>
+    <button onclick="getDayMessage()">Check Day of the Week</button>
+
+    <h2>Lab 6: Ternary Operator</h2>
+    <button onclick="checkEvenOdd()">Check Even or Odd</button>
+
+    <script>
+        // Lab 1: Arithmetic Operators
+        function arithmeticOperations() {
+            let a = parseFloat(prompt("Enter first number:"));
+            let b = parseFloat(prompt("Enter second number:"));
+            
+            console.log(`Addition: ${a + b}`);
+            console.log(`Subtraction: ${a - b}`);
+            console.log(`Multiplication: ${a * b}`);
+            console.log(`Division: ${a / b}`);
+            console.log(`Modulus: ${a % b}`);
+            console.log(`Exponentiation: ${a ** b}`);
+        }
+
+        // Lab 2: Logical Operators
+        function checkVotingEligibility() {
+            let age = parseInt(prompt("Enter your age:"));
+            let isRegistered = confirm("Are you a registered voter? Click OK for Yes, Cancel for No.");
+            
+            let canVote = age >= 18 && isRegistered;
+            console.log(`Voting eligibility: ${canVote ? "Eligible to vote" : "Not eligible to vote"}`);
+        }
+
+        // Lab 3: Comparative Operators
+        function compareNumbers() {
+            let num1 = parseFloat(prompt("Enter first number:"));
+            let num2 = parseFloat(prompt("Enter second number:"));
+
+            if (num1 > num2) {
+                console.log(`${num1} is greater than ${num2}`);
+            } else if (num1 < num2) {
+                console.log(`${num1} is less than ${num2}`);
+            } else {
+                console.log(`${num1} and ${num2} are equal`);
+            }
+        }
+
+        // Lab 4: if-else Statement
+        function checkNumber() {
+            let num = parseFloat(prompt("Enter a number:"));
+
+            if (num > 0) {
+                console.log("The number is positive.");
+            } else if (num < 0) {
+                console.log("The number is negative.");
+            } else {
+                console.log("The number is zero.");
+            }
+        }
+
+        // Lab 5: switch Statement
+        function getDayMessage() {
+            let day = prompt("Enter a day of the week:").toLowerCase();
+
+            switch (day) {
+                case "monday":
+                    console.log("Start of the work week!");
+                    break;
+                case "tuesday":
+                    console.log("Second day, keep going!");
+                    break;
+                case "wednesday":
+                    console.log("Midweek already!");
+                    break;
+                case "thursday":
+                    console.log("Almost there!");
+                    break;
+                case "friday":
+                    console.log("Weekend is near!");
+                    break;
+                case "saturday":
+                    console.log("Enjoy your weekend!");
+                    break;
+                case "sunday":
+                    console.log("Rest and recharge!");
+                    break;
+                default:
+                    console.log("Invalid day entered.");
+            }
+        }
+
+        // Lab 6: Ternary Operator
+        function checkEvenOdd() {
+            let number = parseInt(prompt("Enter a number:"));
+            let result = (number % 2 === 0) ? "Even" : "Odd";
+            console.log(`The number ${number} is ${result}.`);
+        }
+    </script>
+
+</body>
+</html>

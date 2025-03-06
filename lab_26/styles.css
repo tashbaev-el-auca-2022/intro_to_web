@@ -1,0 +1,40 @@
+/* Lab 1: Basic Font Settings */
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    font-weight: normal;
+  }
+  
+  /* Lab 2: Text Alignment and Line Height */
+  p {
+    text-align: justify;
+    line-height: 1.5;
+  }
+  
+  /* Lab 3: Adding Text Shadows */
+  h1 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Lab 4: Using Google Fonts */
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Lab 5: Using @font-face for Custom Fonts */
+  @font-face {
+    font-family: 'MyCustomFont';
+    src: url('mycustomfont.woff2') format('woff2'),
+         url('mycustomfont.woff') format('woff');
+  }
+  
+  body {
+    font-family: 'MyCustomFont', sans-serif;
+  }
+  
