@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 50px;
+    }
+    h2 {
+      color: #333;
+    }
+    .container {
+      background: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+    input[type="text"] {
+      width: 65%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      padding: 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+      background: #ddd;
+    }
+    .actions {
+      display: flex;
+      gap: 5px;
+    }
+    .edit-input {
+      width: 100%;
+      padding: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h2>To-Do List</h2>
+  <div class="container">
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addTask">Add Task</button>
+    <ul id="taskList"></ul>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", loadTasks);
+
+    let taskInput = document.getElementById("taskInput");
+    let addTaskButton = document.getElementById("addTask");
+    let taskList = document.getElementById("taskList");
+
+    addTaskButton.onclick = function() {
+      let taskText = taskInput.value.trim();
+      if (taskText === "") {
+        alert("Task cannot be empty!");
+        return;
+      }
+      addTask(taskText);
+      taskInput.value = "";
+    };
+
+    function addTask(text, completed = false) {
+      let li = document.createElement("li");
+
+      let span = document.createElement("span");
+      span.textContent = text;
+      if (completed) span.classList.add("completed");
+
+      span.onclick = function(e) {
+        e.stopPropagation();
+        span.classList.toggle("completed");
+        saveTasks();
+      };
+
+      let actions = document.createElement("div");
+      actions.className = "actions";
+
+      let editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.onclick = function(e) {
+        e.stopPropagation();
+        let input = document.createElement("input");
+        input.type = "text";
+        input.value = span.textContent;
+        input.className = "edit-input";
+        li.replaceChild(input, span);
+        input.focus();
+        input.onkeydown = function(event) {
+          if (event.key === "Enter") {
+            span.textContent = input.value;
+            li.replaceChild(span, input);
+            saveTasks();
+          }
+        };
+      };
+
+      let deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "X";
+      deleteBtn.onclick = function(e) {
+        e.stopPropagation();
+        taskList.removeChild(li);
+        saveTasks();
+      };
+
+      actions.appendChild(editBtn);
+      actions.appendChild(deleteBtn);
+
+      li.appendChild(span);
+      li.appendChild(actions);
+
+      taskList.appendChild(li);
+      saveTasks();
+    }
+
+    function saveTasks() {
+      let tasks = [];
+      document.querySelectorAll("#taskList li").forEach(li => {
+        let text = li.querySelector("span").textContent;
+        let completed = li.querySelector("span").classList.contains("completed");
+        tasks.push({ text, completed });
+      });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+      let storedTasks = localStorage.getItem("tasks");
+      if (storedTasks) {
+        let tasks = JSON.parse(storedTasks);
+        tasks.forEach(task => addTask(task.text, task.completed));
+      }
+    }
+    // Добавь кнопку в HTML и функцию clearAll()
+    localStorage.clear();
+    taskList.innerHTML = '';
+    let clearAllButton = document.createElement("button");
+    clearAllButton.textContent = "Clear All";
+    clearAllButton.onclick = function() {
+      localStorage.clear();
+      taskList.innerHTML = '';
+    };
+
+    document.querySelector(".container").appendChild(clearAllButton);
+    clearAllButton.style.marginTop = "10px";
+    clearAllButton.style.background = "#dc3545";
+    clearAllButton.style.color = "white";
+    clearAllButton.style.border = "none";
+    clearAllButton.style.padding = "10px";
+    clearAllButton.style.borderRadius = "5px";
+    
+  </script>
+</body>
+</html>

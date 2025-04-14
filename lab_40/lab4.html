@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Change Image</title>
+</head>
+<body>
+    <img id="img" src="default.jpg" width="200">
+    <button onclick="changeImage()">Change Image</button>
+    <script>
+        function changeImage() {
+            let img = document.getElementById("img");
+            img.setAttribute("src", "default2.jpg");
+        }
+    </script>
+</body>
+</html>

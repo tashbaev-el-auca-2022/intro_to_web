@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Gallery</title>
+  <style>
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .gallery img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+    .gallery .item {
+      text-align: center;
+    }
+    .gallery .item h3 {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Image Gallery</h2>
+
+  <div class="gallery" id="gallery">
+  </div>
+
+  <script>
+    fetch('https://jsonplaceholder.typicode.com/photos?_limit=5')
+      .then(response => response.json())
+      .then(data => {
+        const gallery = document.getElementById('gallery');
+        
+        data.forEach(item => {
+          const imageItem = document.createElement('div');
+          imageItem.classList.add('item');
+
+          const image = document.createElement('img');
+          image.src = item.url;  
+          image.alt = item.title; 
+
+          const caption = document.createElement('h3');
+          caption.textContent = item.title; 
+
+          imageItem.appendChild(image);
+          imageItem.appendChild(caption);
+          gallery.appendChild(imageItem);
+        });
+      })
+      .catch(error => console.log('Error fetching images:', error));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title Text Example</title>
+</head>
+<body>
+    <p id="displayText">This is the original text.</p>
+    <button onclick="updateText()">Update Text</button>
+    <script>
+        function updateText() {
+            let textElement = document.getElementById("displayText");
+            textElement.innerText = "The text has been updated!";
+        }
+    </script>
+</body>
+</html>

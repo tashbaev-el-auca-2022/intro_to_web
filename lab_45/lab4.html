@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Users by Name</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 50px;
+    }
+    h2 {
+      color: #333;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 20px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>Search Users by Name</h2>
+  <input type="text" id="searchInput" placeholder="Search by name..." />
+  <ul id="userList"></ul>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(response => response.json())
+        .then(users => {
+          const userList = document.getElementById("userList");
+
+          function renderUserList(filteredUsers) {
+            userList.innerHTML = "";
+            filteredUsers.forEach(user => {
+              const li = document.createElement("li");
+              li.textContent = user.name;
+              userList.appendChild(li);
+            });
+          }
+
+          renderUserList(users);
+
+          document.getElementById("searchInput").addEventListener("input", () => {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchTerm));
+            renderUserList(filteredUsers);
+          });
+        })
+        .catch(error => console.error("Error fetching users:", error));
+    });
+  </script>
+</body>
+</html>
